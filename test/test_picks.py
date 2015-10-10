@@ -3,8 +3,9 @@ from nose.tools import eq_
 from picks import parse
 from .data import data_path
 
-TEST_FILE_PATH = data_path('test.html')
+TEST_EMAIL_PATH = data_path('email.txt')
 
-def test_parse():
-    eq_(parse(TEST_FILE_PATH), 16)
-
+def test_parse_body():
+    with open(TEST_EMAIL_PATH, 'r') as f:
+        parsed = parse(f.read())
+        eq_(len(parsed.split('\n')), 14)
