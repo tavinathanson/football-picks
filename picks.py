@@ -18,13 +18,19 @@ def picks():
 @app.route('/mail', methods=['POST'])
 def mail():
     data = request_dict(request.get_data())
+    to, subject, body = mailer(data)
+    send(to=to, subject=subject, body=body)
+    return jsonify({'success': True})
+
+def mailer(data):
     try:
         body, week = parse(data['body-html'])
         body = 'Here are my picks for week %s:\n\n%s' % (week, body)
+        subject="My picks for week %s!" % week
     except:
         body = 'I couldn\'t read this version of the picks email! Oh no!'
-    send(to=get_sender(data), subject="My picks for week %s!" % week, body=body)
-    return jsonify({'success': True})
+        subject = 'No picks for you!'
+    return get_sender(data), subject, body
 
 def get_sender(data):
     return unquote_plus(data['sender'])
