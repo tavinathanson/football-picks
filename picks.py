@@ -20,9 +20,9 @@ def mail():
     data = request_dict(request.get_data())
     try:
         body, week = parse(data['body-html'])
-        parsed = 'Here are my picks for week %s:\n%s' % (week, body)
+        body = 'Here are my picks for week %s:\n\n%s' % (week, body)
     except:
-        parsed = "I couldn't read this version of the picks email! Oh no!"
+        body = 'I couldn\'t read this version of the picks email! Oh no!'
     send(to=get_sender(data), subject="My picks for week %s!" % week, body=body)
     return jsonify({'success': True})
 
@@ -65,9 +65,11 @@ def is_valid(s):
     return not s.isdigit()
 
 def send(to, subject, body):
+    admin = '%s <%s>' % (environ['ADMIN_NAME'], environ['ADMIN_EMAIL'])
     request = requests.post(environ['SEND_MAIL_URL'], auth=('api', environ['MAILGUN_API_KEY']), data={
-        'from': 'Tavi Nathanson <tavi.nathanson@gmail.com>',
+        'from': admin,
         'to': to,
+        'bcc': admin,
         'subject': subject,
         'text': body
     })
