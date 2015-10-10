@@ -15,7 +15,7 @@ def picks():
 @app.route('/mail', methods=['POST'])
 def mail():
     data = request_dict(request)
-    send(data['body_plain'])
+    send(str(data['body_plain']))
     return jsonify({'url': environ['SEND_MAIL_URL']})
 
 def request_dict(request):
