@@ -24,10 +24,10 @@ def request_dict(request):
     return MultiDict([part.split("=") for part in data.split("&")])
 
 def parse(body):
-    body = unquote_plus(body)
+    #body = unquote_plus(body)
     soup = BeautifulSoup(body, "html.parser")
     tr_tags = soup.find_all('tr')
-    return str(soup)
+    return str(body)
 
 def send(text):
     recipient = 'tavi.nathanson@gmail.com'
