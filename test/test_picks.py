@@ -7,13 +7,3 @@ TEST_FILE_PATH = data_path('test.html')
 
 def test_parse():
     eq_(parse(TEST_FILE_PATH), 16)
-
-
-
-
-
-
-
-
-
-
