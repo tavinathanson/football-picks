@@ -16,7 +16,7 @@ def picks():
 @app.route('/mail', methods=['POST'])
 def mail():
     data = request_dict(request)
-    send(parse(data['body-plain']))
+    send(parse(data['body-html']))
     return jsonify({'success': True})
 
 def request_dict(request):
