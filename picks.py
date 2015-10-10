@@ -2,6 +2,7 @@ import os
 from os import environ
 from flask import Flask, request
 from flask.json import jsonify
+from werkzeug.datastructures import MultiDict
 from bs4 import BeautifulSoup
 import requests
 
@@ -13,9 +14,13 @@ def picks():
 
 @app.route('/mail', methods=['POST'])
 def mail():
-    data = request.get_data()
-    send(str(data))
+    data = request_dict(request)
+    send(data['body_plain'])
     return jsonify({'url': environ['SEND_MAIL_URL']})
+
+def request_dict(request):
+    data = request.get_data()
+    return MultiDict([part.split("=") for part in data.split("&")])
 
 def parse(file_name):
     with open(file_name, 'r') as f:
