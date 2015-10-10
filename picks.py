@@ -5,6 +5,7 @@ from flask.json import jsonify
 from werkzeug.datastructures import MultiDict
 from bs4 import BeautifulSoup
 import requests
+from six.moves.urllib.parse import unquote_plus
 
 app = Flask(__name__)
 
@@ -15,18 +16,18 @@ def picks():
 @app.route('/mail', methods=['POST'])
 def mail():
     data = request_dict(request)
-    send(str(data['body-plain']))
-    return jsonify({'url': environ['SEND_MAIL_URL']})
+    send(parse(data['body-plain']))
+    return jsonify({'success': True})
 
 def request_dict(request):
     data = request.get_data()
     return MultiDict([part.split("=") for part in data.split("&")])
 
-def parse(file_name):
-    with open(file_name, 'r') as f:
-        soup = BeautifulSoup(f, "html.parser")
-        tr_tags = soup.find_all('tr')
-        return len(tr_tags)
+def parse(body):
+    body = unquote_plus(body)
+    soup = BeautifulSoup(body, "html.parser")
+    tr_tags = soup.find_all('tr')
+    return str(soup)
 
 def send(text):
     recipient = 'tavi.nathanson@gmail.com'
