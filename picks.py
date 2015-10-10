@@ -14,7 +14,7 @@ def picks():
 @app.route('/mail', methods=['POST'])
 def mail():
     data = request.get_data()
-    send()
+    send(str(data))
     return jsonify({'url': environ['SEND_MAIL_URL']})
 
 def parse(file_name):
@@ -23,11 +23,11 @@ def parse(file_name):
         tr_tags = soup.find_all('tr')
         return len(tr_tags)
 
-def send():
+def send(text):
     recipient = 'tavi.nathanson@gmail.com'
     request = requests.post(environ['SEND_MAIL_URL'], auth=('api', environ['MAILGUN_API_KEY']), data={
         'from': 'Tavi Nathanson <tavi.nathanson@gmail.com>',
         'to': recipient,
         'subject': 'My football picks!',
-        'text': 'Here are my picks!'
+        'text': 'Here are my picks! %s' % text
     })
