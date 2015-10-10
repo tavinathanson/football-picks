@@ -7,5 +7,6 @@ TEST_EMAIL_PATH = data_path('email.txt')
 
 def test_parse_body():
     with open(TEST_EMAIL_PATH, 'r') as f:
-        parsed = parse(f.read())
-        eq_(len(parsed.split('\n')), 14)
+        body, week = parse(f.read())
+        eq_(len(body.split('\n')), 14)
+        eq_(week, '5')

@@ -19,11 +19,11 @@ def picks():
 def mail():
     data = request_dict(request)
     try:
-        parsed = parse(data['body-html'])
-        parsed = 'Here are my picks:\n%s' % parsed
+        body, week = parse(data['body-html'])
+        parsed = 'Here are my picks for week %s:\n%s' % (week, body)
     except:
         parsed = "I couldn't read this version of the picks email! Oh no!"
-    send(parsed)
+    send(to=data['sender'], subject="My picks for week %s!" % week, body=body)
     return jsonify({'success': True})
 
 def request_dict(request):
@@ -41,8 +41,11 @@ def parse(body):
         lambda row: choice([row['favorite'], row['underdog']]), axis=1)
     best_bets = sample(df_picks.my_pick.unique(), 3)
     df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick + '***' if pick in best_bets else pick)
-    output = '\n'.join(df_picks.my_pick)
-    return output
+    body_output = '\n'.join(df_picks.my_pick)
+    text_parts = ''.join(soup.get_text()).lower().split(" ")
+    week_index = text_parts.index("week")
+    week_num = text_parts[week_index + 1]
+    return body_output, week_num
 
 def parse_tr(tr):
     td_tags = tr.find_all('td')
@@ -59,13 +62,12 @@ def parse_error(true_func, **kwargs):
 def is_valid(s):
     return not s.isdigit()
 
-def send(text):
-    recipient = 'tavi.nathanson@gmail.com'
+def send(to, subject, body):
     request = requests.post(environ['SEND_MAIL_URL'], auth=('api', environ['MAILGUN_API_KEY']), data={
         'from': 'Tavi Nathanson <tavi.nathanson@gmail.com>',
-        'to': recipient,
-        'subject': 'My football picks!',
-        'text': 'Here are my picks! %s' % text
+        'to': to,
+        'subject': subject,
+        'text': body
     })
 
 class ParseError(ValueError):
