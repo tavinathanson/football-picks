@@ -21,4 +21,4 @@ def test_sender():
     with open(TEST_MAILGUN_PATH, 'r') as f:
         data = request_dict(f.read())
         to = get_sender(data)
-        eq_(to, 'tavi.nathanson@gmail.com')
+        eq_(to, 'adam.smith@example.com')
