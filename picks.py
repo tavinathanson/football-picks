@@ -48,8 +48,8 @@ def parse(body):
     df_picks['my_pick'] = df_picks.apply(
         lambda row: choice([row['favorite'], row['underdog']]), axis=1)
     best_bets = sample(set(df_picks.my_pick.unique()), 3)
-    df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick[3:] if pick.startswith('At ') else pick)
     df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick + '***' if pick in best_bets else pick)
+    df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick[3:] if pick.startswith('At ') else pick)
     body_output = '\n'.join(df_picks.my_pick)
     text_parts = ''.join(soup.get_text()).lower().split(" ")
     week_index = text_parts.index("week")
