@@ -74,7 +74,7 @@ def is_valid(s):
     return not s.isdigit()
 
 def send(to, subject, body):
-    admin = '%s <%s>' % (environ['ADMIN_NAME'], environ['ADMIN_EMAIL'])
+    admin = '%s' % (environ['ADMIN_NAME'], environ['ADMIN_EMAIL'])
     request = requests.post(environ['SEND_MAIL_URL'], auth=('api', environ['MAILGUN_API_KEY']), data={
         'from': admin,
         'to': to,
