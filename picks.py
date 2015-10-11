@@ -51,7 +51,9 @@ def parse(body):
     df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick + '***' if pick in best_bets else pick)
     df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick[3:] if pick.startswith('At ') else pick)
     body_output = '\n'.join(df_picks.my_pick)
-    text_parts = ''.join(soup.get_text()).lower().split(" ")
+    text_joined = ''.join(soup.get_text()).lower()
+    text_joined = text_joined.replace('last week', '').replace('other week', '').replace('this week', '')
+    text_parts = text_joined.split(" ")
     week_index = text_parts.index("week")
     week_num = text_parts[week_index + 1]
     return body_output, week_num
