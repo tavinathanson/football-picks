@@ -47,9 +47,15 @@ def parse(body):
     df_picks = pd.DataFrame({'favorite': favorites, 'underdog': underdogs})
     df_picks['my_pick'] = df_picks.apply(
         lambda row: choice([row['favorite'], row['underdog']]), axis=1)
+
     best_bets = sample(set(df_picks.my_pick.unique()), 3)
-    df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick + '***' if pick in best_bets else pick)
-    df_picks.my_pick = df_picks.my_pick.apply(lambda pick: pick[3:] if pick.startswith('At ') else pick)
+    def add_best_bet(pick,):
+        pick = pick + '***' if pick in best_bets else pick
+        pick = pick.replace('*', '')
+        pick = pick[3:] if pick.startswith('At ') else pick
+        return pick
+    df_picks.my_pick = df_picks.my_pick.apply(add_best_bet)
+
     body_output = '\n'.join(df_picks.my_pick)
     text_joined = soup.get_text(" ").lower()
     text_joined = text_joined.replace('last week', '').replace('other week', '').replace('this week', '')
