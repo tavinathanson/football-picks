@@ -50,8 +50,9 @@ def parse(body):
 
     best_bets = sample(set(df_picks.my_pick.unique()), 3)
     def add_best_bet(pick,):
-        pick = pick + '***' if pick in best_bets else pick
+        pick = pick + '^^^' if pick in best_bets else pick
         pick = pick.replace('*', '')
+        pick = pick.replace('^^^', '***')
         pick = pick[3:] if pick.startswith('At ') else pick
         return pick
     df_picks.my_pick = df_picks.my_pick.apply(add_best_bet)
