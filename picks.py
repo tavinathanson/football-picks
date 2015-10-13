@@ -22,6 +22,12 @@ def mail():
     send(to=to, subject=subject, body=body)
     return jsonify({'success': True})
 
+@app.route('/rebecca', methods=['POST'])
+def rebecca():
+    data = request_dict(request.get_data())
+    send(to=get_sender(data), subject="Rebecca", body="Rebecca is great!")
+    return jsonify({'success': True})
+
 def mailer(data):
     try:
         body, week = parse(data['body-html'])
