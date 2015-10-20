@@ -1,7 +1,8 @@
 import nose
 from nose.tools import eq_, ok_
-from picks import parse, request_dict, get_sender, mailer
+from picks import parse, request_dict, get_sender, mailer, parse_tr
 from .data import data_path
+from bs4 import BeautifulSoup
 
 TEST_EMAIL_PATH = data_path('email.txt')
 TEST_MAILGUN_PATH = data_path('mailgun.txt')
@@ -22,3 +23,11 @@ def test_sender():
         data = request_dict(f.read())
         to = get_sender(data)
         eq_(to, 'adam.smith@example.com')
+
+def test_parens():
+    tr_region = BeautifulSoup(('<td>Date</td><td>Seattle</td>'
+                               '<td>Spread</td><td>Hello (Goodbye)</td>'),
+                              'html.parser')
+    favorite, underdog = parse_tr(tr_region)
+    eq_(favorite, 'Seattle')
+    eq_(underdog, 'Hello')

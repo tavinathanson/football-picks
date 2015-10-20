@@ -46,7 +46,7 @@ def request_dict(data):
 
 def parse(body):
     body = unquote_plus(body)
-    soup = BeautifulSoup(body, "html.parser")
+    soup = BeautifulSoup(body, 'html.parser')
     tr_tags = soup.find_all('tr')
     pairs = [parse_tr(tr) for tr in tr_tags if len(tr.find_all('td')) == 4 and ' ET' in str(tr)]
     favorites, underdogs = zip(*pairs)
@@ -73,8 +73,8 @@ def parse(body):
 
 def parse_tr(tr):
     td_tags = tr.find_all('td')
-    favorite = str(td_tags[1].get_text())
-    underdog = str(td_tags[3].get_text())
+    favorite = str(td_tags[1].get_text()).split("(")[0].strip()
+    underdog = str(td_tags[3].get_text()).split("(")[0].strip()
     parse_error(is_valid, s=favorite)
     parse_error(is_valid, s=underdog)
     return (favorite, underdog)
