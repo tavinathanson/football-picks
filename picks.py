@@ -32,7 +32,7 @@ def mailer(data):
     try:
         body, week = parse(data['body-html'])
         body = 'Here are my picks for week %s:\n\n%s' % (week, body)
-        subject="My picks for week %s!" % week
+        subject = "My picks for week %s!" % week
     except:
         body = 'I couldn\'t read this version of the picks email! Oh no!'
         subject = 'No picks for you!'
@@ -66,7 +66,7 @@ def parse(body):
     body_output = '\n'.join(df_picks.my_pick)
     text_joined = soup.get_text(" ").lower()
     text_joined = text_joined.replace('last week', '').replace('other week', '').replace('this week', '')
-    text_parts = [t.strip() for t in text_joined.split(" ")]
+    text_parts = [t.strip() for t in text_joined.split()]
     week_index = text_parts.index("week")
     week_num = text_parts[week_index + 1]
     return body_output, week_num
