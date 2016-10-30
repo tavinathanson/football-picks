@@ -48,7 +48,7 @@ def parse(body):
     body = unquote_plus(body)
     soup = BeautifulSoup(body, 'html.parser')
     tr_tags = soup.find_all('tr')
-    pairs = [parse_tr(tr) for tr in tr_tags if len(tr.find_all('td')) == 4 and ' ET' in str(tr)]
+    pairs = [parse_tr(tr) for tr in tr_tags if len(tr.find_all('td')) >= 4 and has_time(str(tr))]
     favorites, underdogs = zip(*pairs)
     df_picks = pd.DataFrame({'favorite': favorites, 'underdog': underdogs})
     df_picks['my_pick'] = df_picks.apply(
@@ -70,6 +70,13 @@ def parse(body):
     week_index = text_parts.index("week")
     week_num = text_parts[week_index + 1]
     return body_output, week_num
+
+def has_time(s):
+    zones = ['ET', 'AM', 'PM']
+    for zone in zones:
+        if (" %s" % zone.lower()) in s.lower():
+            return True
+    return False
 
 def parse_tr(tr):
     td_tags = tr.find_all('td')

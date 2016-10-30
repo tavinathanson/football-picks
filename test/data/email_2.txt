@@ -1,0 +1,309 @@
+Delivered-To: example@gmail.com
+Received: by 10.31.131.70 with SMTP id f67csp286792vkd;
+        Tue, 25 Oct 2016 15:15:15 -0700 (PDT)
+X-Received: by 10.55.176.134 with SMTP id z128mr20177727qke.243.1477433715567;
+        Tue, 25 Oct 2016 15:15:15 -0700 (PDT)
+Return-Path: <bounce+158c14.3dbf95-example=gmail.com@tavinathanson.com>
+Received: from rs224.mailgun.us (rs224.mailgun.us. [209.61.151.224])
+        by mx.google.com with ESMTPS id e4si14696260qkd.242.2016.10.25.15.15.15
+        for <example@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 25 Oct 2016 15:15:15 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounce+158c14.3dbf95-example=gmail.com@tavinathanson.com designates 209.61.151.224 as permitted sender) client-ip=209.61.151.224;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tavinathanson.com;
+       dkim=pass header.i=@mailgun.org;
+       dkim=pass header.i=@gmail.com;
+       spf=pass (google.com: domain of bounce+158c14.3dbf95-example=gmail.com@tavinathanson.com designates 209.61.151.224 as permitted sender) smtp.mailfrom=bounce+158c14.3dbf95-example=gmail.com@tavinathanson.com;
+       dmarc=pass (p=NONE dis=NONE) header.from=gmail.com
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=tavinathanson.com; q=dns/txt; s=k1; t=1477433715; h=Content-Type: To: Subject: Message-ID: Date: From: References: In-Reply-To: MIME-Version: Sender: X-Feedback-Id; bh=LvUxQ42RMfN8pDWIH3+rvhijaLxIXvf4cjGw8HKCz3U=; b=FIWDkZG1Tanr+0t/7IqX4zdDsswRgKZnbeE4B3RgMpBM5mLNG0otXWfNZB35siJjzcYdiuyK 0JZyfl3a9n7Q6XtyuxrnRkQqLX/BnJl/iVi/T3h/x7U5loW8hM6Ziin0hGPZMhgjN3L0s7eE /Ga3/3h4rDv7NzByYXdTOVUkh6s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=tavinathanson.com; s=k1; q=dns; h=X-Feedback-Id: Sender: MIME-Version: In-Reply-To: References: From: Date: Message-ID: Subject: To: Content-Type; b=tFk7ssSU79e7OjNxpF4cYh9buGkikZ2xazqqGQXYFfQPyxwmVQTB/1qUvd7UAyirtdJ0u1 F5e1qzxT/EvG1k3bDlI4U3aOjaqTVlgDodZ6K4Q5L+zU/X6GRmWHRr+eyy915AhhpCOvQTg2 MaSKaNGUFoUfCZcHPR9GyA0Y0xIPA=
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mailgun.org; q=dns/txt; s=mg; t=1477433715; h=Content-Type: To: Subject: Message-ID: Date: From: References: In-Reply-To: MIME-Version: Sender: X-Feedback-Id; bh=LvUxQ42RMfN8pDWIH3+rvhijaLxIXvf4cjGw8HKCz3U=; b=e8PbLZtgg8ZFa9sEHjQR0dd6Fr8K5zjPZPy5hbcnYbvJhed/l1NxLbhnAf7CNT983PQpJaNl 8lNeioYTpTz9EETuoqhYhMHV77W9OmZMEgvMYnIQ8VGLtQLm7K7QhDlcwa2dcZp1ffAWlSeR Zq3pzkCoEZm8vPRLeYGwkCR92w4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=mailgun.org; s=mg; q=dns; h=X-Feedback-Id: Sender: MIME-Version: In-Reply-To: References: From: Date: Message-ID: Subject: To: Content-Type; b=FkEv8lARwqe8YylpXOZ5y7u6aHLmfY7VaDfWQczic6t0Oys7Zd9Hf5d3L2zG91yyDQiN6D 4uA1vjsIH8g2fKIY92NcAKffETQFabJk3ufACbM1JtPBMD/goDQtc0+Ldlo8zoaear5AIMO1 cVVB9fld/brjc1qEm34+agx9J3gxo=
+X-Feedback-Id: 5619acc08032675afe5bb2d4:mailgun
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sid: WyIxNTk4MSIsICJ0YXZpLm5hdGhhbnNvbkBnbWFpbC5jb20iLCAiM2RiZjk1Il0=
+X-Mailgun-Incoming: Yes
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com [209.85.220.172]) by mxa.mailgun.org with ESMTP id 580fd972.7f78c432cdb0-in8; Tue, 25 Oct 2016 22:15:14 -0000 (UTC)
+Received: by mail-qk0-f172.google.com with SMTP id d23so18574455qke.7
+        for <picks@tavinathanson.com>; Tue, 25 Oct 2016 15:15:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:in-reply-to:references:from:date:message-id:subject:to;
+        bh=LvUxQ42RMfN8pDWIH3+rvhijaLxIXvf4cjGw8HKCz3U=;
+        b=umlu0/nlZ88toaiShknbk+KD1ow1jrp9eZKIN7L2iwuvF84i6HH7l4Yj8cnvxwjs17
+         yuxMIZlTYolEmFDXpp5Kgx4vEOPAtMtuAMLPbYALWhi68UR78BhUQPnKn5NXxCJSau6l
+         B+yJMm5Kw3+jld6QouBqnLaaJualxFgw19vSPikO579uSsnaaPQ0e3kMxW740b35Q/8J
+         JVON705FzNm3tvj8AAKXuKQdGynq/okGFGovdAJcQ+9szGEIjUQw7GbLz7aiz0WUhR0i
+         n+Jjq9PuFxoj7gFIJRPk+yvl6ZD2Kl3UNaFVKzuuYfPppHQfAt+SgnFwu294R1YjeVEb
+         L1kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20130820;
+        h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+         :message-id:subject:to;
+        bh=LvUxQ42RMfN8pDWIH3+rvhijaLxIXvf4cjGw8HKCz3U=;
+        b=AOTQyUlsy6RN0+y9P45RDeQ00vqjY36q2TChUPnTXiUZMuZwYWvBOm4Mi/MzEIxg+w
+         MtwEO9Xo6Cb7Xgxj1eVX65ReJWeJnkOUq+Qx0ZeLaGEx5btQv6mSgyQIe+qkJbp7rj1G
+         ji8pyvRqQcQnp/liP6Jr8vlQc+ftwwfDayUU3AXWIobvg2m8u82PuFIeFGYHC+sgyhp3
+         o6Z8qJek4x9d9yPTwZTnj0kkhYuz4z1u/V4uatudyIiYs9LJeGp7sh3h/JngkY//BX/8
+         A5G9Su67CwareQle0tcjwevpSgXIo5Vs0dG33YQ3pCOaD+0wRR7DkZNN9QXGgDMIn1O0
+         nx8A==
+X-Gm-Message-State: ABUngvewd7xmngPBMftmKLOu0hcYp8a/QDecbDvSo6hPJukDYwBMpB54x1dRJRXq0XlrvQ6zos0G/rBPW9NxcQ==
+X-Received: by 10.55.12.10 with SMTP id 10mr11611796qkm.49.1477433714192; Tue, 25 Oct 2016 15:15:14 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.12.172.73 with HTTP; Tue, 25 Oct 2016 15:15:12 -0700 (PDT)
+Received: by 10.12.172.73 with HTTP; Tue, 25 Oct 2016 15:15:12 -0700 (PDT)
+In-Reply-To: <157fcb7afaa-6b59-1672@webprd-a02.mail.aol.com>
+References: <157fcb7afaa-6b59-1672@webprd-a02.mail.aol.com>
+Date: Tue, 25 Oct 2016 18:15:12 -0400
+Message-ID: <CAAjWF9HGc05-zxntqODDn27gyP=9sfAGTiKMUqW5EAeuwtQ3+A@mail.gmail.com>
+Subject: Fwd: Standings + Week 8 Picks
+To: picks@tavinathanson.com
+Content-Type: multipart/alternative; boundary=001a114c89eeb6d33c053fb7d73e
+
+--001a114c89eeb6d33c053fb7d73e
+Content-Type: text/plain; charset=UTF-8
+
+---------- Forwarded message ----------
+
+
+
+
+
+
+* THURSDAY NIGHT & SUNDAY MORNING GAMES 3 BEST BETS NFL Point Spreads For
+Week 8 - Week Eight NFL Football Point Spread - NFL Spreads 10/27 - 10/30,
+2016 *
+*Date & Time* *Favorite* *Spread* *Underdog*
+10/27 8:25 ET At Tennessee -3.5 Jacksonville
+10/30 9:30 AM Cincinnati
+(At Twickenham) -3.5 Washington
+10/30 4:25 ET At Atlanta -3.5 Green Bay
+10/30 1:00 ET At Houston -2.5 Detroit
+10/30 1:00 ET Seattle -3.5 At New Orleans
+10/30 1:00 ET New England -6.5 At Buffalo
+10/30 1:00 ET NY Jets -4.5 At Cleveland
+10/30 1:00 ET At Tampa Bay -1.5 Oakland
+10/30 1:00 ET Kansas City -2.5 At Indianapolis
+10/30 4:05 ET At Denver -5.5 San Diego
+10/30 1:00 ET At Carolina -2.5 Arizona
+10/30 8:30 ET At Dallas -4.5 Philadelphia
+*    Monday Night Football Point Spread *
+
+
+
+
+10/31 8:30 ET Minnesota -6.5 At Chicago
+Byes: Baltimore, Los Angeles, Miami, NY Giants, Pittsburgh, San Francisco
+
+--001a114c89eeb6d33c053fb7d73e
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<span style=3D"font-size:13.0pt;font-family:Verdana">
+<font size=3D"5" color=3D"red">THURSDAY NIGHT &amp; SUNDAY MORNING GAMES<br=
+>
+<br>
+3 BEST BETS<br>
+</font><br>
+<br>
+NFL Point Spreads For Week 8 -=20
+Week Eight NFL Football Point Spread -
+NFL Spreads 10/27 - 10/30, 2016
+
+
+
+</span></b></center></span>
+
+
+
+
+<div><span style=3D"font-size:10.0pt;font-family:verdana">
+
+
+
+</span></div>
+<table cols=3D"4" width=3D"580" cellspacing=3D"6" cellpadding=3D"3" border=
+=3D"0">
+  <tbody><tr>
+    <td width=3D"26%"><span title=3D"Date and Time of Game."><b>Date &amp; =
+Time</b></span></td>
+    <td width=3D"28%"><span title=3D"Team Spotting Points in a Bet Against =
+the Point Spread."><b>Favorite</b></span></td>
+    <td width=3D"18%"><span title=3D"Short for Point Spread. Number of Poin=
+ts Subtracted from Final Score of Favorite to Determine Winner of a Point S=
+pread Based Wager."><b>Spread</b></span></td>
+    <td width=3D"28%"><span title=3D"Team Receiving Points in a Bet With th=
+e Point Spread."><b>Underdog</b></span></td>
+  </tr>
+
+
+
+ <tr>
+    <td>10/27 8:25 ET</td>
+    <td>At Tennessee</td>
+    <td>-3.5</td>
+    <td>Jacksonville</td>
+  </tr>
+
+ <tr>
+    <td>10/30 9:30 AM</td>
+    <td>Cincinnati<br>
+<font size=3D"-1">(At Twickenham)</font></td>
+    <td>-3<font size=3D"2">.5</font></td>
+    <td>Washington</td>
+  </tr>
+
+ <tr>
+    <td>10/30 4:25 ET</td>
+    <td>At Atlanta</td>
+    <td>-3<font size=3D"2">.5</font></td>
+    <td>Green Bay</td>
+  </tr>
+
+ <tr>
+    <td>10/30 1:00 ET</td>
+    <td>At Houston</td>
+    <td>-2.5</td>
+    <td>Detroit</td>
+  </tr>
+
+ <tr>
+    <td>10/30 1:00 ET</td>
+    <td>Seattle</td>
+    <td>-3<font size=3D"2">.5</font></td>
+    <td>At New Orleans</td>
+  </tr>
+
+ <tr>
+    <td>10/30 1:00 ET</td>
+    <td>New England</td>
+    <td>-6<font size=3D"2">.5</font></td>
+    <td>At Buffalo</td>
+  </tr>
+
+ <tr>
+    <td>10/30 1:00 ET</td>
+    <td>NY Jets</td>
+    <td>-4<font size=3D"2">.5</font></td>
+    <td>At Cleveland</td>
+  </tr>
+
+ <tr>
+    <td>10/30 1:00 ET</td>
+    <td>At Tampa Bay</td>
+    <td>-1<font size=3D"2">.5</font></td>
+    <td>Oakland</td>
+  </tr>
+
+ <tr>
+    <td>10/30 1:00 ET</td>
+    <td>Kansas City</td>
+    <td>-2.5</td>
+    <td>At Indianapolis</td>
+  </tr>
+
+ <tr>
+    <td>10/30 4:05 ET</td>
+    <td>At Denver</td>
+    <td>-5.5</td>
+    <td>San Diego</td>
+  </tr>
+
+ <tr>
+    <td>10/30 1:00 ET</td>
+    <td>At Carolina</td>
+    <td>-2.5</td>
+    <td>Arizona</td>
+    <td><br>
+</td>
+   =20
+  </tr>
+
+ <tr>
+    <td>10/30 8:30 ET</td>
+    <td>At Dallas</td>
+    <td>-4.5</td>
+    <td>Philadelphia</td>
+  </tr>
+
+
+
+
+
+</tbody></table>
+
+
+
+<div>
+</div>
+<center>
+<span style=3D"font-size:11.0pt;font-family:Verdana"><b>
+=C2=A0=C2=A0
+Monday Night Football Point Spread
+</b></span>
+</center>
+
+
+
+
+<span style=3D"font-size:11.0pt;font-family:Verdana">
+
+<table cols=3D"4" width=3D"580" cellspacing=3D"6" cellpadding=3D"3" border=
+=3D"0">
+  <tbody><tr>
+
+    <td width=3D"26%"><br>
+</td>
+    <td width=3D"28%"><br>
+</td>
+    <td width=3D"18%"><br>
+</td>
+    <td width=3D"28%"><br>
+</td>
+  </tr>
+
+
+ <tr>
+    <td>10/31 8:30 ET</td>
+    <td>Minnesota</td>
+    <td>-6<font size=3D"2">.5</font></td>
+    <td>At Chicago</td>
+  </tr>
+
+</tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div><span style=3D"font-size:8.5pt;font-family:Arial">
+Byes: Baltimore, Los Angeles, Miami, NY Giants, Pittsburgh, San Francisco
+</span></div>
+</span>
+</font></div>
+
+--001a114c89eeb6d33c053fb7d73e--

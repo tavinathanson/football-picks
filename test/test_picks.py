@@ -5,6 +5,7 @@ from .data import data_path
 from bs4 import BeautifulSoup
 
 TEST_EMAIL_PATH = data_path('email.txt')
+TEST_EMAIL_2_PATH = data_path('email_2.txt')
 TEST_MAILGUN_PATH = data_path('mailgun.txt')
 
 def test_parse_body():
@@ -12,6 +13,12 @@ def test_parse_body():
         body, week = parse(f.read())
         eq_(len(body.split('\n')), 14)
         eq_(week, '5')
+
+def test_parse_body_2():
+    with open(TEST_EMAIL_2_PATH, 'r') as f:
+        body, week = parse(f.read())
+        eq_(len(body.split('\n')), 13)
+        eq_(week, '8')
 
 def test_parse_no_picks():
     with open(TEST_MAILGUN_PATH, 'r') as f:
