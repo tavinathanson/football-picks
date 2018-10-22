@@ -42,7 +42,7 @@ def get_sender(data):
     return unquote_plus(data['sender'])
 
 def request_dict(data):
-    return MultiDict([part.split("=") for part in data.split("&")])
+    return MultiDict([part.split("=") for part in str(data).split("&")])
 
 def parse(body):
     body = unquote_plus(body)
